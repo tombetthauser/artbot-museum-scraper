@@ -23,7 +23,7 @@ for i in range(1,10):
     driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
     artist_name_ele = driver.find_element_by_css_selector("h2.body-medium-bold.m-0 a")
     artist_name = artist_name_ele.get_attribute("innerHTML")
-    print("ARTIST:", artist_name)
+    print("artist_name:", artist_name)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artist_name: {artist_name}</li>'")
     sleep(random())
   except:
@@ -33,7 +33,7 @@ for i in range(1,10):
     driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
     artwork_name_ele = driver.find_element_by_css_selector("h1.collection-detail-header__title.body-medium.m-0 em")
     artwork_name = artwork_name_ele.get_attribute("innerHTML")
-    print("TITLE:", artwork_name)
+    print("artwork_name:", artwork_name)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_name: {artwork_name}</li>'")
     sleep(random())
   except:
@@ -43,7 +43,7 @@ for i in range(1,10):
     driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
     artwork_year_ele = driver.find_elements_by_css_selector("div.artwork-detail__info p.m-0")[1]
     artwork_year = artwork_year_ele.get_attribute("innerHTML").split(">")[-1]
-    print("YEAR:", artwork_year)
+    print("artwork_year:", artwork_year)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_year: {artwork_year}</li>'")
     sleep(random())
   except:
@@ -52,14 +52,45 @@ for i in range(1,10):
   try:
     driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
     artwork_classification_ele = driver.find_element_by_css_selector("div.artwork-detail__info p.m-0 a")
-    artwork_classification = artwork_classification_ele.get_attribute("innerHTML").split(">")[-1]
-    print("YEAR:", artwork_classification)
+    artwork_classification = artwork_classification_ele.get_attribute("innerHTML")
+    print("artwork_classification:", artwork_classification)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_classification: {artwork_classification}</li>'")
     sleep(random())
   except:
     print("no artwork_classification found!")
 
-  driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>-- ARTWORK {i} COMPLETE --</li>'")
+  try:
+    driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
+    artwork_medium_ele = driver.find_elements_by_css_selector("div.artwork-detail__info p.m-0 a")[1]
+    artwork_medium = artwork_medium_ele.get_attribute("innerHTML")
+    print("artwork_medium:", artwork_medium)
+    driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_medium: {artwork_medium}</li>'")
+    sleep(random())
+  except:
+    print("no artwork_medium found!")
+
+  try:
+    driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
+    artwork_dimensions_ele = driver.find_elements_by_css_selector("div.artwork-detail__info p.m-0")[4]
+    artwork_dimensions = artwork_dimensions_ele.get_attribute("innerHTML").split(">")[-1]
+    print("artwork_dimensions:", artwork_dimensions)
+    driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_dimensions: {artwork_dimensions}</li>'")
+    sleep(random())
+  except:
+    print("no artwork_dimensions found!")
+
+  try:
+    driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
+    artwork_image_url_ele = driver.find_element_by_css_selector("img.image.artwork")
+    artwork_image_url = artwork_image_url_ele.src
+    print("artwork_image_url:", artwork_image_url)
+    driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_image_url: {artwork_image_url}</li>'")
+    sleep(random())
+  except:
+    print("no artwork_image_url found!")
+
+  driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>-- artwork_{i} complete --</li>'")
+  print(f"-- artwork_{i} complete --")
   sleep(random())
 
 driver.quit()

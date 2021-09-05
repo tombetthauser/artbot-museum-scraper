@@ -10,7 +10,7 @@ const leftMargin = Math.floor(Math.random() * 1000);
 const yVibration = Math.floor(Math.random() * 50);
 const xVibration = Math.floor(Math.random() * 50);
 
-liveDiv.style.transition = `${Math.floor(Math.random() * 250)}ms`;
+liveDiv.style.transition = `${Math.floor(Math.random() * 1000)}ms`;
 
 // liveDiv.style.height = `${Math.floor(Math.random() * 750) + 100}px`;
 liveDiv.style.width = `${Math.floor(Math.random() * 800) + 200}px`;
