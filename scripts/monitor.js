@@ -12,6 +12,6 @@ monitorDiv.style.backgroundColor = "white";
 monitorDiv.style.border = "3px dotted black";
 monitorDiv.style.padding = "50px";
 monitorDiv.style.color = "black";
-monitorDiv.innerText = "MONITOR DIV";
+monitorDiv.innerHTML = "<h4>MONITOR DIV</h4>";
 
 body.prepend(monitorDiv);
