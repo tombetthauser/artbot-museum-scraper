@@ -14,7 +14,11 @@ DRIVER_PATH = '/usr/local/bin/chromedriver'
 driver = webdriver.Chrome(options=options, executable_path=DRIVER_PATH)
 actions = ActionChains(driver)
 
-for i in range(1,35000):
+missing_count = 0
+i = 0
+
+while missing_count < 10:
+  temp_count = 0
   driver.get(f"https://whitney.org/collection/works/{i}")
   driver.execute_script(open("./scripts/filter.js").read())
   driver.execute_script(open("./scripts/monitor.js").read())
@@ -27,6 +31,7 @@ for i in range(1,35000):
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artist_name: {artist_name}</li>'")
     sleep(random())
   except:
+    temp_count += 1
     print("no artist name found")
 
   try:
@@ -37,6 +42,7 @@ for i in range(1,35000):
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_name: {artwork_name}</li>'")
     sleep(random())
   except:
+    temp_count += 1
     print("no artwork name found")
 
   try:
@@ -47,6 +53,7 @@ for i in range(1,35000):
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_year: {artwork_year}</li>'")
     sleep(random())
   except:
+    temp_count += 1
     print("no artwork year found!")
 
   try:
@@ -57,6 +64,7 @@ for i in range(1,35000):
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_classification: {artwork_classification}</li>'")
     sleep(random())
   except:
+    temp_count += 1
     print("no artwork_classification found!")
 
   try:
@@ -67,6 +75,7 @@ for i in range(1,35000):
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_medium: {artwork_medium}</li>'")
     sleep(random())
   except:
+    temp_count += 1
     print("no artwork_medium found!")
 
   try:
@@ -77,6 +86,7 @@ for i in range(1,35000):
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_dimensions: {artwork_dimensions}</li>'")
     sleep(random())
   except:
+    temp_count += 1
     print("no artwork_dimensions found!")
 
   try:
@@ -87,10 +97,18 @@ for i in range(1,35000):
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_image_url: {artwork_image_url}</li>'")
     sleep(random())
   except:
+    temp_count += 1
     print("no artwork_image_url found!")
+
+  if temp_count == 0:
+    missing_count = 0
+  else:
+    missing_count += 1
 
   driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>-- artwork_{i} complete --</li>'")
   print(f"-- artwork_{i} complete --")
   sleep(random())
+
+  i += 1
 
 driver.quit()
