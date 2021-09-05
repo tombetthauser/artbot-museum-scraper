@@ -19,6 +19,7 @@ for i in range(1,5000):
   driver.get(f"https://whitney.org/collection/works/{i}")
   driver.execute_script(open("./scripts/filter.js").read())
   driver.execute_script(open("./scripts/monitor.js").read())
+  driver.execute_script(open("./scripts/vibrate.js").read())
   sleep(random())
   try:
     driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
