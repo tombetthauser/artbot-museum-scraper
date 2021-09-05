@@ -3,6 +3,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep
 from random import *
+# from os import open
 
 is_headless = False
 
@@ -16,12 +17,8 @@ actions = ActionChains(driver)
 
 for i in range(1,5000):
   driver.get(f"https://whitney.org/collection/works/{i}")
-      # document.querySelector('html').style.filter = 'saturate(0) contrast(20) invert(1)';
-  driver.execute_script(f"""
-      document.querySelector('html').style.filter = 'saturate(0) contrast(20)';
-      document.querySelectorAll('*').forEach(ele => ele.style.border = '{randint(1,10)}px solid red');
-    """)
-  # driver.execute_script("document.querySelector('*').style.border = '1px solid black';")
+  driver.execute_script(open("./scripts/filter.js").read())
+  driver.execute_script(open("./scripts/monitor.js").read())
   sleep(random())
   try:
     driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
