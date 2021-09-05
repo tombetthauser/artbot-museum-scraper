@@ -14,7 +14,7 @@ DRIVER_PATH = '/usr/local/bin/chromedriver'
 driver = webdriver.Chrome(options=options, executable_path=DRIVER_PATH)
 actions = ActionChains(driver)
 
-for i in range(1,10):
+for i in range(1,35000):
   driver.get(f"https://whitney.org/collection/works/{i}")
   driver.execute_script(open("./scripts/filter.js").read())
   driver.execute_script(open("./scripts/monitor.js").read())
@@ -81,8 +81,8 @@ for i in range(1,10):
 
   try:
     driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
-    artwork_image_url_ele = driver.find_element_by_css_selector("img.image.artwork")
-    artwork_image_url = artwork_image_url_ele.src
+    artwork_image_url_ele = driver.find_element_by_css_selector("img.artwork")
+    artwork_image_url = artwork_image_url_ele.get_attribute("src")
     print("artwork_image_url:", artwork_image_url)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_image_url: {artwork_image_url}</li>'")
     sleep(random())
