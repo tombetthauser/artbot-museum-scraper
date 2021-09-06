@@ -156,8 +156,8 @@ while missing_count < 10:
 
   if temp_count == 0:
     with open(data_filepath, 'a') as f:
-      w = csv.DictWriter(f, my_dict.keys())
-      w.writerow({"test": count_2, "testing": count_2 + 1})
+      w = csv.DictWriter(f, temp_artwork_dict.keys())
+      w.writerow(temp_artwork_dict)
       count_2 += 2
     missing_count = 0
   else:
@@ -166,7 +166,7 @@ while missing_count < 10:
   driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>-- artwork_{i} complete --</li>'")
   print(f"-- artwork_{i} complete --")
   sleep(random())
-  
+
   i += 1
 
 driver.quit()
