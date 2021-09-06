@@ -30,9 +30,9 @@ data_filepath = f"data/whitney_artworks_data_{csv_id}.csv"
 
 artwork_columns_dict = {
     'artwork_id': None,
+    'artwork_image_url': None,
     'artwork_classification': None,
     'artwork_dimensions': None,
-    'artwork_image_url': None,
     'artwork_medium': None,
     'artwork_name': None,
     'artwork_year': None,
