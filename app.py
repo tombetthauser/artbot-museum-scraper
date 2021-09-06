@@ -1,8 +1,10 @@
+import csv
+import time
 from time import sleep
-# from random import *
-# from selenium import webdriver
-# from selenium.webdriver.chrome.options import Options
-# from selenium.webdriver.common.action_chains import ActionChains
+from random import *
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.action_chains import ActionChains
 
 # is_headless = False
 
@@ -18,23 +20,23 @@ from time import sleep
 # i = 0
 
 
-import csv
-
 my_dict = {"test": 1, "testing": 2}
 my_dict_2 = {"test": 3, "testing": 4}
 
 count_2 = 0
 
-with open('mycsvfile.csv', 'w') as f:  # You will need 'wb' mode in Python 2.x
+# new output csv file params
+csv_id = hex(int(time.time()))
+data_filepath = f"data/whitney_artworks_data_{csv_id}.csv"
+
+with open(data_filepath, 'w') as f:
   w = csv.DictWriter(f, my_dict.keys())
   w.writeheader()
-  # w.writerow(my_dict)
 
 while True:
-  with open('mycsvfile.csv', 'a') as f:  # You will need 'wb' mode in Python 2.x
-    w = csv.DictWriter(f, my_dict_2.keys())
-    # # w.writeheader()
-    w.writerow({"test": count_2, "testing": count_2 + 2})
+  with open(data_filepath, 'a') as f: 
+    w = csv.DictWriter(f, my_dict.keys())
+    w.writerow({"test": count_2, "testing": count_2 + 1})
     count_2 += 2
     sleep(1)
 
