@@ -25,23 +25,23 @@ my_dict_2 = {"test": 3, "testing": 4}
 
 count_2 = 0
 
-# new output csv file params
+# new output csv file setup
 csv_id = hex(int(time.time()))
 data_filepath = f"data/whitney_artworks_data_{csv_id}.csv"
 
-temp_artwork_dict = {
-    'artwork_id': i,
-    'artist_name': '',
-    'artwork_name': '',
-    'artwork_year': '',
-    'artwork_classification': '',
-    'artwork_medium': '',
-    'artwork_dimensions': '',
-    'artwork_image_url': ''
+artwork_columns_dict = {
+    'artwork_id': None,
+    'artist_name': None,
+    'artwork_name': None,
+    'artwork_year': None,
+    'artwork_classification': None,
+    'artwork_medium': None,
+    'artwork_dimensions': None,
+    'artwork_image_url': None
 }
 
 with open(data_filepath, 'w') as f:
-  w = csv.DictWriter(f, my_dict.keys())
+  w = csv.DictWriter(f, artwork_columns_dict.keys())
   w.writeheader()
 
 
@@ -61,22 +61,15 @@ with open(data_filepath, 'w') as f:
 # while True:
 
 while missing_count < 10:
-  temp_artwork_dict = {
-      'artwork_id': i,
-      'artist_name': '',
-      'artwork_name': '',
-      'artwork_year': '',
-      'artwork_classification': '',
-      'artwork_medium': '',
-      'artwork_dimensions': '',
-      'artwork_image_url': ''
-  }
+  temp_artwork_dict = dict(artwork_columns_dict)
+  temp_artwork_dict['artwork_id'] = i
 
   temp_count = 0
   driver.get(f"https://whitney.org/collection/works/{i}")
   driver.execute_script(open("./scripts/filter.js").read())
   driver.execute_script(open("./scripts/monitor.js").read())
   driver.execute_script(open("./scripts/vibrate.js").read())
+  
   try:
     driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
     artist_name_ele = driver.find_element_by_css_selector("h2.body-medium-bold.m-0 a")
@@ -162,12 +155,10 @@ while missing_count < 10:
     print("no artwork_image_url found!")
 
   if temp_count == 0:
-    # save data to csv
     with open(data_filepath, 'a') as f:
       w = csv.DictWriter(f, my_dict.keys())
       w.writerow({"test": count_2, "testing": count_2 + 1})
       count_2 += 2
-    # reset 404 found count
     missing_count = 0
   else:
     missing_count += 1
@@ -175,8 +166,7 @@ while missing_count < 10:
   driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>-- artwork_{i} complete --</li>'")
   print(f"-- artwork_{i} complete --")
   sleep(random())
-
-
+  
   i += 1
 
 driver.quit()
