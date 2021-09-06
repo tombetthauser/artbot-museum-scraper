@@ -13,8 +13,6 @@ const yVibration = Math.floor(Math.random() * 50);
 const xVibration = Math.floor(Math.random() * 50);
 
 liveDiv.style.transition = `${Math.floor(Math.random() * 1000)}ms`;
-
-// liveDiv.style.height = `${Math.floor(Math.random() * 750) + 100}px`;
 liveDiv.style.width = `${Math.floor(Math.random() * 800) + 200}px`;
 
 const interval = setInterval(() => {
@@ -26,5 +24,7 @@ const interval = setInterval(() => {
   liveDiv.style.boxShadow = `${Math.random() < .5 ? '-' : ''}${Math.floor(Math.random() * 100)}px ${Math.floor(Math.random() * 100)}px 0px rgba(0,0,0,${Math.random() * 1})`;
   liveDiv.style.padding = `${Math.floor(Math.random() * 10) + 40}px`;
   liveDiv.style.border = `${Math.floor(Math.random() * 15)}px ${BORDERS[Math.floor(Math.random() * BORDERS.length)]} black`;
-  liveDiv.style.fontFamily = `${FONTS[Math.floor(Math.random() * FONTS.length)]}`;
+  document.querySelectorAll("#monitor-div li").forEach(ele => ele.style.fontFamily = `${FONTS[Math.floor(Math.random() * FONTS.length)]}`);
+  document.querySelector("#monitor-div h3").style.fontFamily = `${FONTS[Math.floor(Math.random() * FONTS.length)]}`;
+  document.querySelector("#monitor-div h3").style.fontSize = `${Math.floor(Math.random() * 5) + 25}px`;
 }, 20);
