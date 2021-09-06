@@ -19,7 +19,6 @@ actions = ActionChains(driver)
 missing_count = 0
 i = 0
 
-
 my_dict = {"test": 1, "testing": 2}
 my_dict_2 = {"test": 3, "testing": 4}
 
@@ -31,35 +30,20 @@ data_filepath = f"data/whitney_artworks_data_{csv_id}.csv"
 
 artwork_columns_dict = {
     'artwork_id': None,
-    'artist_name': None,
+    'artwork_classification': None,
+    'artwork_dimensions': None,
+    'artwork_image_url': None,
+    'artwork_medium': None,
     'artwork_name': None,
     'artwork_year': None,
-    'artwork_classification': None,
-    'artwork_medium': None,
-    'artwork_dimensions': None,
-    'artwork_image_url': None
+    'artist_name': None,
 }
 
 with open(data_filepath, 'w') as f:
   w = csv.DictWriter(f, artwork_columns_dict.keys())
   w.writeheader()
 
-
-# with open('mycsvfile.csv', 'w') as f:  # You will need 'wb' mode in Python 2.x
-#     # w = csv.DictWriter(f, my_dict.keys())
-#     # w.writeheader()
-#     # w.writerow(my_dict)
-    
-#     w2 = csv.DictWriter(f, my_dict_2.keys())
-#     # w.writeheader()
-#     w2.writerow(my_dict_2)
-
-
-
-
-
-# while True:
-
+# start scraping
 while missing_count < 10:
   temp_artwork_dict = dict(artwork_columns_dict)
   temp_artwork_dict['artwork_id'] = i
@@ -74,7 +58,9 @@ while missing_count < 10:
     driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
     artist_name_ele = driver.find_element_by_css_selector("h2.body-medium-bold.m-0 a")
     artist_name = artist_name_ele.get_attribute("innerHTML")
-    temp_artwork_dict['artist_name'] = artist_name
+    artist_name = "".join(artist_name.split("'"))
+    artist_name = "".join(artist_name.split('"'))
+    temp_artwork_dict['artist_name'] = f"'{artist_name}'"
     print("artist_name:", artist_name)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artist_name: {artist_name}</li>'")
     sleep(random())
@@ -86,7 +72,9 @@ while missing_count < 10:
     driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
     artwork_name_ele = driver.find_element_by_css_selector("h1.collection-detail-header__title.body-medium.m-0 em")
     artwork_name = artwork_name_ele.get_attribute("innerHTML")
-    temp_artwork_dict['artwork_name'] = artwork_name
+    artwork_name = "".join(artwork_name.split("'"))
+    artwork_name = "".join(artwork_name.split('"'))
+    temp_artwork_dict['artwork_name'] = f"'{artwork_name}'"
     print("artwork_name:", artwork_name)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_name: {artwork_name}</li>'")
     sleep(random())
@@ -98,7 +86,9 @@ while missing_count < 10:
     driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
     artwork_year_ele = driver.find_elements_by_css_selector("div.artwork-detail__info p.m-0")[1]
     artwork_year = artwork_year_ele.get_attribute("innerHTML").split(">")[-1]
-    temp_artwork_dict['artwork_year'] = artwork_year
+    artwork_year = "".join(artwork_year.split("'"))
+    artwork_year = "".join(artwork_year.split('"'))
+    temp_artwork_dict['artwork_year'] = f"'{artwork_year}'"
     print("artwork_year:", artwork_year)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_year: {artwork_year}</li>'")
     sleep(random())
@@ -110,7 +100,9 @@ while missing_count < 10:
     driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
     artwork_classification_ele = driver.find_element_by_css_selector("div.artwork-detail__info p.m-0 a")
     artwork_classification = artwork_classification_ele.get_attribute("innerHTML")
-    temp_artwork_dict['artwork_classification'] = artwork_classification
+    artwork_classification = "".join(artwork_classification.split("'"))
+    artwork_classification = "".join(artwork_classification.split('"'))
+    temp_artwork_dict['artwork_classification'] = f"'{artwork_classification}'"
     print("artwork_classification:", artwork_classification)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_classification: {artwork_classification}</li>'")
     sleep(random())
@@ -122,7 +114,9 @@ while missing_count < 10:
     driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
     artwork_medium_ele = driver.find_elements_by_css_selector("div.artwork-detail__info p.m-0 a")[1]
     artwork_medium = artwork_medium_ele.get_attribute("innerHTML")
-    temp_artwork_dict['artwork_medium'] = artwork_medium
+    artwork_medium = "".join(artwork_medium.split("'"))
+    artwork_medium = "".join(artwork_medium.split('"'))
+    temp_artwork_dict['artwork_medium'] = f"'{artwork_medium}'"
     print("artwork_medium:", artwork_medium)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_medium: {artwork_medium}</li>'")
     sleep(random())
@@ -134,7 +128,9 @@ while missing_count < 10:
     driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
     artwork_dimensions_ele = driver.find_elements_by_css_selector("div.artwork-detail__info p.m-0")[4]
     artwork_dimensions = artwork_dimensions_ele.get_attribute("innerHTML").split(">")[-1]
-    temp_artwork_dict['artwork_dimensions'] = artwork_dimensions
+    artwork_dimensions = "".join(artwork_dimensions.split("'"))
+    artwork_dimensions = "".join(artwork_dimensions.split('"'))
+    temp_artwork_dict['artwork_dimensions'] = f"'{artwork_dimensions}'"
     print("artwork_dimensions:", artwork_dimensions)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_dimensions: {artwork_dimensions}</li>'")
     sleep(random())
@@ -146,7 +142,9 @@ while missing_count < 10:
     driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight / {randint(1,10)});")
     artwork_image_url_ele = driver.find_element_by_css_selector("img.artwork")
     artwork_image_url = artwork_image_url_ele.get_attribute("src")
-    temp_artwork_dict['artwork_image_url'] = artwork_image_url
+    artwork_image_url = "".join(artwork_image_url.split("'"))
+    artwork_image_url = "".join(artwork_image_url.split('"'))
+    temp_artwork_dict['artwork_image_url'] = f"'{artwork_image_url}'"
     print("artwork_image_url:", artwork_image_url)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_image_url: {artwork_image_url}</li>'")
     sleep(random())
