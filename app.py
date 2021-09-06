@@ -63,7 +63,7 @@ while missing_count < 10:
     temp_artwork_dict['artist_name'] = f"'{artist_name}'"
     print("artist_name:", artist_name)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artist_name: {artist_name}</li>'")
-    sleep(random())
+    # sleep(random())
   except:
     temp_count += 1
     print("no artist name found")
@@ -77,7 +77,7 @@ while missing_count < 10:
     temp_artwork_dict['artwork_name'] = f"'{artwork_name}'"
     print("artwork_name:", artwork_name)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_name: {artwork_name}</li>'")
-    sleep(random())
+    # sleep(random())
   except:
     temp_count += 1
     print("no artwork name found")
@@ -91,7 +91,7 @@ while missing_count < 10:
     temp_artwork_dict['artwork_year'] = f"'{artwork_year}'"
     print("artwork_year:", artwork_year)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_year: {artwork_year}</li>'")
-    sleep(random())
+    # sleep(random())
   except:
     temp_count += 1
     print("no artwork year found!")
@@ -105,7 +105,7 @@ while missing_count < 10:
     temp_artwork_dict['artwork_classification'] = f"'{artwork_classification}'"
     print("artwork_classification:", artwork_classification)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_classification: {artwork_classification}</li>'")
-    sleep(random())
+    # sleep(random())
   except:
     temp_count += 1
     print("no artwork_classification found!")
@@ -119,7 +119,7 @@ while missing_count < 10:
     temp_artwork_dict['artwork_medium'] = f"'{artwork_medium}'"
     print("artwork_medium:", artwork_medium)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_medium: {artwork_medium}</li>'")
-    sleep(random())
+    # sleep(random())
   except:
     temp_count += 1
     print("no artwork_medium found!")
@@ -133,7 +133,7 @@ while missing_count < 10:
     temp_artwork_dict['artwork_dimensions'] = f"'{artwork_dimensions}'"
     print("artwork_dimensions:", artwork_dimensions)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_dimensions: {artwork_dimensions}</li>'")
-    sleep(random())
+    # sleep(random())
   except:
     temp_count += 1
     print("no artwork_dimensions found!")
@@ -147,7 +147,7 @@ while missing_count < 10:
     temp_artwork_dict['artwork_image_url'] = f"'{artwork_image_url}'"
     print("artwork_image_url:", artwork_image_url)
     driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>artwork_image_url: {artwork_image_url}</li>'")
-    sleep(random())
+    # sleep(random())
   except:
     temp_count += 1
     print("no artwork_image_url found!")
@@ -163,7 +163,7 @@ while missing_count < 10:
 
   driver.execute_script(f"document.querySelector('#monitor-div').innerHTML = document.querySelector('#monitor-div').innerHTML + '<li>-- artwork_{i} complete --</li>'")
   print(f"-- artwork_{i} complete --")
-  sleep(random())
+  # sleep(random())
 
   i += 1
 
